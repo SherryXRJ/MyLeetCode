@@ -1,4 +1,4 @@
-package com.sherry.leetcode._0001_Twosum.mine;
+package com.sherry.leetcode._0001_TwoSum.mine;
 
 
 /**
