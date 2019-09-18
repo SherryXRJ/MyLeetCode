@@ -28,7 +28,7 @@ public class MedianOfTwoSortedArrays {
 
     /**
      *  通过Stream 合并两个数组为List，并排序，取中间两位数，求平均值
-     *
+     *  时间复杂度不满足要求
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         double result;
