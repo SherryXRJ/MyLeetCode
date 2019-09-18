@@ -1,6 +1,5 @@
 package com.sherry.leetcode._0003_LongestSubstringWithoutRepeatingCharacters.optimization;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -28,7 +27,7 @@ import java.util.Set;
  *     请注意，你的答案必须是子串的长度，"pwke" 是一个子序列，不是子串。<p/>
  *
  */
-public class LongestSubstringWithoutRepeatingCharacters {
+public class SlidingWindow {
 
     /**
      * 滑动窗口
@@ -61,7 +60,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     public static void main(String[] args) {
-        LongestSubstringWithoutRepeatingCharacters demo = new LongestSubstringWithoutRepeatingCharacters();
+        SlidingWindow demo = new SlidingWindow();
         System.out.println(demo.lengthOfLongestSubstring("abccbabb"));
     }
 }
