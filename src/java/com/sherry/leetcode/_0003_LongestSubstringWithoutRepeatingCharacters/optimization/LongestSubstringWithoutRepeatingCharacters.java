@@ -1,6 +1,7 @@
 package com.sherry.leetcode._0003_LongestSubstringWithoutRepeatingCharacters.optimization;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -39,25 +40,28 @@ public class LongestSubstringWithoutRepeatingCharacters {
         int i = 0, max = 0, j = 0;
 
         //  set存储字符串
-        Set<Character> set = new HashSet<>();
+        Set<Character> set = new LinkedHashSet<>();
 
         while (i < chars.length && j < chars.length) {
             if (!set.contains(chars[j])) {
                 set.add(chars[j]);
                 j++;
-                //  j - i即: [i, j) 窗口大小
-                max = Math.max(max, j - i);
+                //  j - i即: [i, j) 窗口大小     以下两种写法都可以
+//                max = Math.max(max, j - i);
+                max = Math.max(max, set.size());
             } else {
+                //  删除下标i位置的元素，此时j的值没有改变
                 set.remove(chars[i]);
                 i++;
             }
+            System.out.println("[" + i + "," + j + ")");
         }
-        //  TODO:   max的理解
+        //  窗口最大值
         return max;
     }
 
     public static void main(String[] args) {
         LongestSubstringWithoutRepeatingCharacters demo = new LongestSubstringWithoutRepeatingCharacters();
-        System.out.println(demo.lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(demo.lengthOfLongestSubstring("abccbabb"));
     }
 }
