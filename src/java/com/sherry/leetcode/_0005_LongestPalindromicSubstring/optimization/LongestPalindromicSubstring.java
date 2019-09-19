@@ -72,7 +72,6 @@ public class LongestPalindromicSubstring {
     public static void main(String[] args) {
         LongestPalindromicSubstring demo = new LongestPalindromicSubstring();
         String result = demo.longestPalindrome("a");
-
         System.out.println(result);
     }
 }
