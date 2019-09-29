@@ -52,10 +52,12 @@ public class StringtoInteger {
 
         //  是否有符号
         boolean hasSymbol = str.charAt(0) == '-' || str.charAt(0) == '+';
+        //  正负数
         boolean isPositive = str.charAt(0) != '-';
         int rRange = hasSymbol ? 1 : 0;
         int result = 0;
 
+        //  找出合法数字
         for (; rRange < str.length(); rRange++) {
             if (str.charAt(rRange) < '0' || str.charAt(rRange) > '9') {
                 break;
