@@ -21,8 +21,8 @@ public class IntegertoRoman {
      * 贪心算法
      */
     public String intToRoman(int num) {
-        int[] nums = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-        String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[]       nums    =   {1000,  900,    500,    400,    100,    90,     50,     40,     10,     9,      5,      4,      1};
+        String[]    symbols =   {"M",   "CM",   "D",    "CD",   "C",    "XC",   "L",    "XL",   "X",    "IX",   "V",    "IV",   "I"};
 
         //  从码表中最大的部分依次取
         StringBuilder sb = new StringBuilder();
