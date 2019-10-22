@@ -18,10 +18,21 @@ public class ReverseNodesInKGroup {
     }
 
     /**
-     * 反转局部链表
-     * @param pre   局部链表前一个节点
-     * @param list  需要翻转的链表
-     * @param size  翻转节点个数
+     * 反转局部链表（4个特殊指针 pre after originHead  originTail）
+     * <p/>
+     * 例 输入[1 -> 2 -> 3 -> 4 -> 5]  3
+     * <p/>
+     * 原始0(dummy) -> 1 -> 2 -> 3 -> 4 -> 5
+     * <p>
+     * pre = 0 , after = 4 , originHead = 1 , originTail = 3
+     * <p>
+     * 1 -> 2 -> 3 是需要翻转的部分，是current节点指向上一节点,并保存当前节点(用于下一节点指向)
+     * <p>
+     * 最后调整特殊指针: pre.next = originTail; originHead.next = after; 再递归后续需要调整的链表
+     *
+     * @param pre  局部链表前一个节点
+     * @param list 需要翻转的链表
+     * @param size 翻转节点个数
      */
     private void reverseListNode(ListNode pre, ListNode list, int size) {
         ListNode checkNode = pre;
