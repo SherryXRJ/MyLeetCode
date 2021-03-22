@@ -38,6 +38,7 @@ public class TextJustification {
                 List<String> list = map.getOrDefault(left, new ArrayList<>());
                 list.add(words[right]);
                 map.put(left, list);
+                //  FIXME: 这里 +1 出了问题
                 tempSize += (words[right].length() + 1);
                 right++;
             }
