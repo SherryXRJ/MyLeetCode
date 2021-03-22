@@ -27,20 +27,92 @@ public class TextJustification {
 
     public List<String> fullJustify(String[] words, int maxWidth) {
 
-        int left, right = 0;
+        int left = 0;
+        int right = 0;
         int tempSize = 0;
-        int index = 0;
 
-        Map<Integer, List<String>> map = new HashMap<>();
+        Map<Integer, List<String>> map = new HashMap<>(words.length);
 
-        for (int i = 0; i < words.length; i++) {
-            while (tempSize <= maxWidth) {
+        while (right < words.length) {
+            while(right < words.length && tempSize + words[right].length() <= maxWidth) {
+                List<String> list = map.getOrDefault(left, new ArrayList<>());
+                list.add(words[right]);
+                map.put(left, list);
+                tempSize += (words[right].length() + 1);
                 right++;
-                map.getOrDefault(index, new ArrayList<>());
+            }
+            tempSize = 0;
+            left = right;
+        }
+
+        List<String> result = new ArrayList<>();
+
+
+        int index = 0;
+        for (Integer key : map.keySet()) {
+            List<String> list = map.get(key);
+
+            if (index == map.keySet().size() - 1) {
+                //  最后一行 左对齐(最后一行需要左对齐进行处理(且单词之间不插入额外的空格))
+                result.add(this.leftJustification(list, maxWidth));
+            } else {
+                //  非最后一行 左右对齐
+                result.add(this.leftRightJustification(list, maxWidth));
+            }
+            index++;
+        }
+
+        return result;
+    }
+
+    /**
+     * 左右对齐
+     */
+    private String leftRightJustification(List<String> list, int maxWidth){
+        int wordsNum = list.size();
+
+        //  间隙数
+        int gaps = wordsNum == 1 ? 1 : wordsNum - 1;
+        //  当前行的单词总长度
+        int wordsLen = list.stream().mapToInt(String::length).sum();
+        //  计算平均空格数
+        int spaceNum = (maxWidth - wordsLen) / gaps;
+        //  多余的空格数
+        int extraSpaceNum = (maxWidth - wordsLen) % gaps;
+
+        String mergeStr = "";
+        for (int i = 0; i < wordsNum; i++) {
+            if (i == 0)
+                mergeStr = "";
+
+            if (i < gaps) {
+                mergeStr += rightpad(list.get(i), i + 1 <= extraSpaceNum ? spaceNum + extraSpaceNum + list.get(i).length(): spaceNum + list.get(i).length());
+            } else {
+                mergeStr += list.get(i);
             }
         }
 
-        return null;
+        return mergeStr;
+    }
+
+    /**
+     * 左对齐
+     */
+    private String leftJustification(List<String> list, int maxWidth){
+        String joinStr = String.join(" ", list);
+
+        return rightpad(joinStr, maxWidth);
+    }
+
+    private String rightpad(String text, int length) {
+        return String.format("%-" + length + "." + length + "s", text);
+    }
+
+    public static void main(String[] args) {
+//        String[] arr = new String[]{"What","must","be","acknowledgment","shall","be"};
+        String[] arr = new String[]{"Science","is","what","we","understand","well","enough","to","explain","to","a","computer.","Art","is","everything","else","we","do"};
+        TextJustification demo = new TextJustification();
+        demo.fullJustify(arr, 20);
     }
 
 }
